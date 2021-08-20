@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen , fireEvent} from '@testing-library/react';
 import App from './App';
 
 test('renders button', () => {
@@ -21,3 +21,10 @@ test("Background color of button" , () => {
   expect(backgroundColor).toHaveStyle({backgroundColor:"red"})
 })
 
+
+test( "test clicking", () =>{
+  render(<App />);
+  const myButton = screen.getByRole("button", {name:"Change to blue"})
+  fireEvent.click(myButton);
+  expect(myButton).toHaveStyle({backgroundColor:"blue"})
+})
