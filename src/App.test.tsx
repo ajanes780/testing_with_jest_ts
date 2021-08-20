@@ -22,9 +22,10 @@ test("Background color of button" , () => {
 })
 
 
-test( "test clicking", () =>{
+test( "clicking", () =>{
   render(<App />);
   const myButton = screen.getByRole("button", {name:"Change to blue"})
   fireEvent.click(myButton);
   expect(myButton).toHaveStyle({backgroundColor:"blue"})
+
 })
