@@ -2,23 +2,29 @@ import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
 import App from './App';
 
-test('renders button', () => {
+test('renders button correctly ', () => {
     render(<App/>);
+    // is the button loaded
     const colorButton = screen.getByRole('button', {name: 'Change to blue'});
     expect(colorButton).toBeInTheDocument();
+
+    // what is the intial color
+    expect(colorButton ).toHaveStyle({backgroundColor: "red"})
+
+
+    //when button is clicked  does the color and text change
+    fireEvent.click(colorButton) ;
+    expect(colorButton ).toHaveStyle({backgroundColor: "blue"})
+    expect(colorButton).toHaveTextContent("Change to red")
 });
 
-test("Background color of button", () => {
-    render(<App/>);
-    const backgroundColor = screen.getByRole('button', {name: 'Change to blue'});
-    expect(backgroundColor).toHaveStyle({backgroundColor: "red"})
-})
-
-
-test("clicking", () => {
+test( "Can the button be disabled" , () => {
     render(<App/>);
     const myButton = screen.getByRole("button", {name: "Change to blue"})
-    fireEvent.click(myButton);
-    expect(myButton).toHaveStyle({backgroundColor: "blue"})
+    const checkBox = screen.getByRole("checkbox")
 
+    fireEvent.click(checkBox);
+    expect(myButton).toBeDisabled()
+    fireEvent.click(checkBox);
+    expect(myButton).toBeEnabled()
 })
