@@ -27,3 +27,13 @@ test( "Can the button be disabled and enabled " , () => {
     fireEvent.click(checkBox);
     expect(myButton).toBeEnabled()
 })
+
+test("Disabled button turns grey when disabled and back to red when enabled", ()=> {
+    render(<App/>);
+    const myButton = screen.getByRole("button", {name: "Change to blue"})
+    const checkBox = screen.getByRole("checkbox", {name:"Disable Button"})
+    fireEvent.click(checkBox);
+    expect(myButton).toHaveStyle({backgroundColor:"grey"})
+    fireEvent.click(checkBox);
+    expect(myButton).toHaveStyle({backgroundColor:"red"})
+})
