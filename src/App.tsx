@@ -2,6 +2,10 @@ import React, {useState} from 'react';
 
 import './App.css';
 
+export const camelCaseBreaker = ( e:string ) =>{
+ return e.replace(/\B([A-Z])\B/g, ' $1')
+
+}
 
 const App = () =>{
   const [ buttonColor, setButtonColor ] = useState('red');

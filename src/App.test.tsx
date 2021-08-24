@@ -1,7 +1,7 @@
 import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
 import App from './App';
-
+import {camelCaseBreaker} from "./App"
 test('renders button correctly ', () => {
     render(<App/>);
     // is the button loaded
@@ -32,8 +32,25 @@ test("Disabled button turns grey when disabled and back to red when enabled", ()
     render(<App/>);
     const myButton = screen.getByRole("button", {name: "Change to blue"})
     const checkBox = screen.getByRole("checkbox", {name:"Disable Button"})
+    // disable the button
     fireEvent.click(checkBox);
     expect(myButton).toHaveStyle({backgroundColor:"grey"})
+    //enable the button
     fireEvent.click(checkBox);
     expect(myButton).toHaveStyle({backgroundColor:"red"})
+})
+// This describe block describes all the test being run here
+describe('Spaces before camel case letters', () =>{
+
+    test("Works for no inner capital letters", () =>{
+        expect(camelCaseBreaker("Red")).toBe("Red")
+    })
+
+    test("Works for one inner capital letter", ()=>{
+        expect(camelCaseBreaker("MidnightBlue")).toBe("Midnight Blue")
+    })
+
+    test("Works for multiple inner capital letters", ()=> {
+        expect(camelCaseBreaker("MediumVioletRed")).toBe("Medium Violet Red")
+    })
 })
