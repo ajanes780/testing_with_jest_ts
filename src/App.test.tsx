@@ -18,11 +18,10 @@ test('renders button correctly ', () => {
     expect(colorButton).toHaveTextContent("Change to red")
 });
 
-test( "Can the button be disabled" , () => {
+test( "Can the button be disabled and enabled " , () => {
     render(<App/>);
     const myButton = screen.getByRole("button", {name: "Change to blue"})
-    const checkBox = screen.getByRole("checkbox")
-
+    const checkBox = screen.getByRole("checkbox", {name:"Disable Button"})
     fireEvent.click(checkBox);
     expect(myButton).toBeDisabled()
     fireEvent.click(checkBox);
